@@ -8,6 +8,7 @@ This package helps to integrate [payme.uz](http://payme.uz) and your application
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install.
 
 ```bash
+pip install django
 pip install requests
 pip install djangorestframework
 
@@ -20,7 +21,6 @@ pip install -r requirements.txt
 python 3.7 +
 django 2 +
 djangorestframework 3.7 +
-PaycomUz 2 +
 ````
 
 
