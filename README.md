@@ -9,8 +9,8 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install.
 
 ```bash
 pip install django
-pip install requests
 pip install djangorestframework
+pip install requests
 
           or  
 
