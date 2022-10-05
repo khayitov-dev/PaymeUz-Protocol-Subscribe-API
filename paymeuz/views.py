@@ -1,5 +1,9 @@
+"""
+Siz Karta yaratganizda token beriladi, shu token ni barcha request larda ishlatasiz.
+"""
 
 import requests
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -13,7 +17,7 @@ from paymeuz.methods import *
 
 
 class CardCreateApiView(APIView):
-
+    """Kartani Avval Ro'yxatdan o'tkazishimiz kerak bo'ladi."""
     def post(self, request):
         serializer = SubscribeSerializer(data=request.data, many=False)
         serializer.is_valid(raise_exception=True)
@@ -22,6 +26,7 @@ class CardCreateApiView(APIView):
         return Response(result)
 
     def card_create(self, validated_data):
+        """Kartani yaratib qilib olamiz."""
         data = dict(
             id=validated_data['id'],
             method=CARD_CREATE,
@@ -45,6 +50,7 @@ class CardCreateApiView(APIView):
         return result
 
     def card_get_verify_code(self, token):
+        """Agar karta mavjud bo'lsa unga code jo'natamiz."""
         data = dict(
             method=CARD_GET_VERIFY_CODE,
             params=dict(
@@ -61,7 +67,7 @@ class CardCreateApiView(APIView):
 
 
 class CardVerifyApiView(APIView):
-
+    """Tasdiqlash code ni tekshirish."""
     def post(self, request):
         serializer = SubscribeSerializer(data=request.data, many=False)
         serializer.is_valid(raise_exception=True)
@@ -70,6 +76,7 @@ class CardVerifyApiView(APIView):
         return Response(result)
 
     def card_verify(self, validated_data):
+        """Code ni kiritish."""
         data = dict(
             id=validated_data['id'],
             method=CARD_VERIFY,
@@ -85,7 +92,7 @@ class CardVerifyApiView(APIView):
 
 
 class PaymentApiView(APIView):
-
+    """Karta muvaffaqiyatlik ro'yxatdan o'tgandan keyin, endi Pul to'lasek bo'ladi."""
     def post(self, request):
         serializer = SubscribeSerializer(data=request.data, many=False)
         serializer.is_valid(raise_exception=True)
@@ -95,6 +102,7 @@ class PaymentApiView(APIView):
         return Response(result)
 
     def receipts_create(self, token, validated_data):
+        """Pul tushishi uchun headers da biz KEY ni berishimiz kerak."""
         key_2 = validated_data['params']['account'][KEY_2] if KEY_2 else None
         data = dict(
             id=validated_data['id'],
@@ -125,6 +133,7 @@ class PaymentApiView(APIView):
         return result
 
     def receipts_pay(self, trans_id, token):
+        """Barchasi aniq va pul tolandi."""
         data = dict(
             method=RECEIPTS_PAY,
             params=dict(

@@ -126,12 +126,22 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+
 PAYME_SETTINGS = {
-    'DEBUG':True,   #True - test mode, False - production mode
-    'ID':'Your KASSA_ID',  
-    'SECRET_KEY':'Your TEST KEY OR PRODUCTIN KEY',
+    'DEBUG':True,   #DEBUG => True yoki False ligiga qarab sizning KEY ingiz bilan ishlaydi.
+    'ID':'Your KASSA_ID',  # ID =>  bu sizga payme tomonidan beriladigan kassa ID.
+    'SECRET_KEY':'Your TEST KEY OR PRODUCTIN KEY',  # SECRET_KEY =>  bu sizga payme tomonidan beriladigan SECRET_KEY.
     'ACCOUNTS':{
-        'KEY_1':'order_id',
+        'KEY_1':'order_id',   # KEY_1 =>  Order ID uchun.
         'KEY_2':'',
     }
 }
+
+"""
+
+ESLATMA: Sizga 2ta KEY beriladi bittasi test uchun bittasi asosiy production uchun.
+Kassa ga pul tushishini yani production da real ni ishlatmoqchi bo'lselar, SECRET_KEY ga asosiy KEY ni qo'ying.
+Keyin esa KASSA faol ekanini tekshiring. Agar kassa faol bo'lmasa sizda ishlamasligi mumkin.
+
+"""
